@@ -54,7 +54,22 @@ Sample command based on the linode.com tutorial. This container shares the vpn c
 docker run --init --mount type=bind,readonly,source=/home/tincVPN/linodeVPN,target=/etc/tinc/linodeVPN --network host --cap-add NET_ADMIN agsel/tinc "-n linodeVPN -D"
 ```
 
+Sample docker-compose.yml file:
+```
+version: '3'
 
+services:
+  tinc:
+    image: agsel/tinc
+    container_name: tinc
+    network_mode: host
+    volumes:
+      - /home/tincVPN/linodeVPN:/etc/tinc/hadoopVPN
+    command: ["-n hadoopVPN -D -d2"]
+    cap_add:
+      - NET_ADMIN
+
+```
 
 ## Authors
 
